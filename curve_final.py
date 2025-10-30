@@ -153,7 +153,7 @@ class DynamicCurveOptimizationEnv:
         while i > 0:
             name = dss.PVsystems.Name()
             
-            # Alternatively, get directly from PVSystem object
+            # Get directly from PVSystem object
             dss.PVsystems.Name(name)
             p_kw = dss.PVsystems.Pmpp()
             q_kvar = dss.PVsystems.kvar()
@@ -184,7 +184,7 @@ class DynamicCurveOptimizationEnv:
             # Use only the PV's local voltage for control decisions
             control_voltage = pv_voltage
             
-            # Get available solar (Pmpp represents the maximum available power)
+            # Get available solar
             try:
                 dss.PVsystems.Name(pv_name)
                 irrad = dss.PVsystems.IrradianceNow()
@@ -827,4 +827,5 @@ if __name__ == "__main__":
     ppo_agent, environment = train_dynamic_curve_ppo(day=day, episodes=episodes)
     
     print("\nTesting optimized dynamic curves...")
+
     test_env = test_dynamic_curve_ppo(day=day, model_path=os.path.join(OUTDIR, "dynamic_curve_ppo_best.pth"))
